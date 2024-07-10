@@ -1,7 +1,11 @@
 import styles from './rodape.module.css'
+import { ReactComponent as MarcaRegistrada } from '../../assets-src/marca_registrada.svg'
 
 export default function Rodape() {
     return (
-        "rodape"
+        <footer className={styles.rodape}>
+            <MarcaRegistrada />
+            Desenvolvido por Alura.
+        </footer>
     )
 }

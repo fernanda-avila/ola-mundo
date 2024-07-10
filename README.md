@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+Olá Mundo
+Este projeto foi desenvolvido durante um curso de React da Alura pelo programa ONE na Escola de Frontend. A aplicação é uma página de dicas e informações sobre o mundo da Tecnologia da Informação (TI).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Funcionalidades
+- Navegação entre páginas: Utilização do React Router para navegar entre diferentes seções da aplicação.
+- Exibição de posts: Posts com dicas e informações sobre TI.
+- Recomendações de posts: Sugestões de outros posts relacionados.
+- Renderização de markdown: Uso de React Markdown para renderizar o conteúdo dos posts.
+- CSS Modular: Estilização dos componentes de maneira modular para evitar conflitos de escopo de estilos.
+- Hooks do React: Utilização de vários hooks como useState, useEffect, useParams, entre outros, para gerenciar o estado e efeitos colaterais na aplicação.
+- Página Sobre Mim: Uma página dedicada com informações sobre o desenvolvedor do projeto.
 
-## Available Scripts
+Tecnologias Utilizadas
+- React: Biblioteca JavaScript para construir interfaces de usuário.
+- React Router: Biblioteca para roteamento em aplicações React.
+- React Markdown: Biblioteca para renderização de markdown.
+- CSS Modules: Para estilização dos componentes de maneira modular.
 
-In the project directory, you can run:
+Estrutura do Projeto
+```bash
+/public
+    /assets
+        /posts
+            /1
+                capa.png
+            /2
+                capa.png
+            ...
+/src
+    /components
+        PostModelo.js
+        PaginaPadrao.js
+        PostCard.js
+    /paginas
+        NaoEncontrada.js
+        SobreMim.js
+    /assets-src
+        posts.json
+    index.js
+```
 
-### `npm start`
+Sobre o React Router
+O React Router é uma biblioteca que permite gerenciar a navegação em uma aplicação React. Ele oferece componentes como Route, Link e BrowserRouter para definir rotas, criar links de navegação e gerenciar o histórico de navegação da aplicação. No nosso projeto, usamos o useParams para capturar parâmetros da URL e exibir o post correspondente.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Exemplo de Uso do React Router
+```javascript
+import { Route, Routes, useParams } from "react-router-dom";
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+function App() {
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/post/:id" element={<Post />} />
+            <Route path="/sobre-mim" element={<SobreMim />} />
+        </Routes>
+    );
+}
 
-### `npm test`
+function Post() {
+    const { id } = useParams();
+    // Lógica para buscar e exibir o post com o ID correspondente
+}
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+CSS Modular
+CSS Modules permitem a criação de estilos que são automaticamente escopados para o componente em que são usados. Isso evita conflitos de nome de classe e facilita a manutenção dos estilos.
 
-### `npm run build`
+Exemplo de CSS Modular
+post.module.css:
+```css
+.postCard {
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 8px;
+}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+.postImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+.postTitle {
+    font-size: 1.5em;
+    margin: 8px 0;
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+.postExcerpt {
+    color: #555;
+}
+```
 
-### `npm run eject`
+PostCard.js:
+```javascript
+import React from 'react';
+import styles from './post.module.css';
+const PostCard = ({ post, imageUrl }) => {
+    return (
+        <div className={styles.postCard}>
+            <img src={imageUrl} alt={`Capa do post ${post.titulo}`} className={styles.postImage} />
+            <h3 className={styles.postTitle}>{post.titulo}</h3>
+            <p className={styles.postExcerpt}>{post.excerpt}</p>
+        </div>
+    );
+};
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+export default PostCard;
+```
+const PostCard = ({ post, imageUrl }) => {
+    return (
+        <div className={styles.postCard}>
+            <img src={imageUrl} alt={`Capa do post ${post.titulo}`} className={styles.postImage} />
+            <h3 className={styles.postTitle}>{post.titulo}</h3>
+            <p className={styles.postExcerpt}>{post.excerpt}</p>
+        </div>
+    );
+};
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+export default PostCard;
